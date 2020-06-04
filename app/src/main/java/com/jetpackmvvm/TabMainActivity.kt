@@ -1,11 +1,9 @@
 package com.jetpackmvvm
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.jetpackmvvm.core.BaseActivity
 
-class TabMainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class TabMainActivity : BaseActivity() {
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_tab_main
     }
 }

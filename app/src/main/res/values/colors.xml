@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#e9c7a4</color>
+    <color name="colorPrimaryDark">#daaa76</color>
+    <color name="colorAccent">#1ed0a8</color>
+    <color name="transparent">#00000000</color>
+    <color name="app_window_bg">#f1f1f1</color>
+    <color name="white">#ffffffff</color>
+
 </resources>
