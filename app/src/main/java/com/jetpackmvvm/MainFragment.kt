@@ -1,18 +1,15 @@
 package com.jetpackmvvm
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.jetpackmvvm.core.BaseFragment
 import com.jetpackmvvm.home.NewHomeFragment
 import com.jetpackmvvm.house.NewFamilyFragment
 import com.jetpackmvvm.message.MessageFragment
 import com.jetpackmvvm.personal.MineFragment
+import com.tenclouds.fluidbottomnavigation.FluidBottomNavigationItem
+import com.tenclouds.fluidbottomnavigation.listener.OnTabSelectedListener
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment() {
@@ -36,8 +33,6 @@ class MainFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        navMainMenu.itemTextAppearanceActive = R.style.bottom_normal_text
-        navMainMenu.itemTextAppearanceInactive = R.style.bottom_normal_text
         vpFragmentMain.isUserInputEnabled = false
         vpFragmentMain.offscreenPageLimit = 1
         vpFragmentMain.adapter = object : FragmentStateAdapter(this) {
@@ -45,25 +40,33 @@ class MainFragment : BaseFragment() {
 
             override fun getItemCount() = fragmentList.size
         }
-        navMainMenu.setOnNavigationItemSelectedListener(onNavigationItemSelected)
-    }
+        fluidBottomNavigation.accentColor = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+        fluidBottomNavigation.backColor = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+        fluidBottomNavigation.textColor = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+        fluidBottomNavigation.iconColor = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+        fluidBottomNavigation.iconSelectedColor = ContextCompat.getColor(requireContext(), R.color.iconSelectedColor)
 
-    private val onNavigationItemSelected = BottomNavigationView.OnNavigationItemSelectedListener {
-        when (it.itemId) {
-            R.id.menu_device -> {
-                switchFragment(0)
-            }
-            R.id.menu_family -> {
-                switchFragment(1)
-            }
-            R.id.menu_message -> {
-                switchFragment(2)
-            }
-            R.id.menu_mine -> {
-                switchFragment(3)
+        fluidBottomNavigation.items =
+            listOf(
+                FluidBottomNavigationItem(
+                    "设备",
+                    ContextCompat.getDrawable(requireContext(), R.drawable.drawable_menu_device)),
+                FluidBottomNavigationItem(
+                    "家庭",
+                    ContextCompat.getDrawable(requireContext(), R.drawable.drawable_menu_family)),
+                FluidBottomNavigationItem(
+                    "消息",
+                    ContextCompat.getDrawable(requireContext(), R.drawable.drawable_menu_message)),
+                FluidBottomNavigationItem(
+                    "我的",
+                    ContextCompat.getDrawable(requireContext(), R.drawable.drawable_menu_mine))
+            )
+
+        fluidBottomNavigation.onTabSelectedListener = object : OnTabSelectedListener {
+            override fun onTabSelected(position: Int) {
+                switchFragment(position)
             }
         }
-        true
     }
 
     private fun switchFragment(position: Int): Boolean {

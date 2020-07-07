@@ -40,5 +40,5 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
-
+    implementation 'com.github.10clouds:FluidBottomNavigation-android:1.2'
 }
